@@ -8,24 +8,6 @@ import tojiPng from "@/assets/toji.png";
 import vikingPng from "@/assets/Viking.png";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Future Leaders Hiphop" },
-      {
-        name: "description",
-        content:
-          "Future Leaders Hiphop — Web3 influencer network, full stack developers, trading community, and ecosystem builders.",
-      },
-      { property: "og:title", content: "Future Leaders Hiphop" },
-      {
-        property: "og:description",
-        content:
-          "Future Leaders Hiphop — Web3 influencer network, full stack developers, trading community, and ecosystem builders.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
   component: Index,
 });
 
