@@ -33,7 +33,8 @@ const IMAGES = [
     bg: "#E8B93C",
     panel: "#F0CC5C",
     name: "Viking",
-    subtitle: "Co-Founder of Future Leaders, helping Web3 projects scale through strategic partnerships and community-led growth.",
+    subtitle:
+      "Co-Founder of Future Leaders, helping Web3 projects scale through strategic partnerships and community-led growth.",
   },
   {
     src: anasPng,
@@ -75,7 +76,8 @@ function Index() {
     setAudio(audioInstance);
 
     const playAudio = () => {
-      audioInstance.play()
+      audioInstance
+        .play()
         .then(() => {
           setIsPlaying(true);
         })
@@ -131,7 +133,9 @@ function Index() {
   const navigate = (dir: "next" | "prev") => {
     if (isAnimating) return;
     setIsAnimating(true);
-    setActiveIndex((prev) => (dir === "next" ? (prev + 1) % IMAGES.length : (prev + IMAGES.length - 1) % IMAGES.length));
+    setActiveIndex((prev) =>
+      dir === "next" ? (prev + 1) % IMAGES.length : (prev + IMAGES.length - 1) % IMAGES.length,
+    );
     setTimeout(() => setIsAnimating(false), DURATION);
   };
 
@@ -228,11 +232,7 @@ function Index() {
           className="absolute top-6 right-6 z-[60] w-12 h-12 rounded-full border-2 border-white flex items-center justify-center text-white bg-transparent hover:bg-white/10 transition-all duration-300 scale-90 hover:scale-100 cursor-pointer"
           aria-label={isPlaying ? "Pause music" : "Play music"}
         >
-          {isPlaying ? (
-            <Volume2 size={22} className="animate-pulse" />
-          ) : (
-            <VolumeX size={22} />
-          )}
+          {isPlaying ? <Volume2 size={22} className="animate-pulse" /> : <VolumeX size={22} />}
         </motion.button>
 
         {/* Giant ghost text */}
@@ -361,7 +361,7 @@ function Index() {
           transition={{
             y: { type: "spring", stiffness: 100, damping: 18, delay: 0.5 },
             opacity: { duration: 0.2 },
-            scale: { type: "spring", stiffness: 300, damping: 20 }
+            scale: { type: "spring", stiffness: 300, damping: 20 },
           }}
           className="absolute bottom-6 right-4 sm:bottom-20 sm:right-10 flex items-center no-underline cursor-pointer"
           style={{
@@ -384,10 +384,7 @@ function Index() {
             transition={{ type: "spring", stiffness: 300, damping: 12 }}
             className="flex items-center"
           >
-            <ArrowRight
-              className="w-5 h-5 sm:w-8 sm:h-8 ml-2"
-              strokeWidth={2.25}
-            />
+            <ArrowRight className="w-5 h-5 sm:w-8 sm:h-8 ml-2" strokeWidth={2.25} />
           </motion.div>
         </motion.a>
       </div>
