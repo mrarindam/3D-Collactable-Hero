@@ -201,7 +201,7 @@ function Index() {
       style={{
         backgroundColor: IMAGES[activeIndex].bg,
         transition: `background-color ${DURATION}ms ${EASE}`,
-        fontFamily: "Inter, sans-serif",
+        fontFamily: "'Metal Mania', sans-serif",
       }}
       className="relative w-full overflow-hidden"
     >
@@ -237,7 +237,7 @@ function Index() {
           style={{
             zIndex: 2,
             top: "18%",
-            fontFamily: "Anton, sans-serif",
+            fontFamily: "'Metal Mania', sans-serif",
             fontSize: "clamp(40px, 13.5vw, 300px)",
             fontWeight: 900,
             color: "white",
@@ -342,7 +342,7 @@ function Index() {
           className="absolute bottom-6 right-4 sm:bottom-20 sm:right-10 flex items-center no-underline"
           style={{
             zIndex: 60,
-            fontFamily: "Anton, sans-serif",
+            fontFamily: "'Metal Mania', sans-serif",
             fontSize: "clamp(20px, 4vw, 56px)",
             fontWeight: 400,
             color: "white",
