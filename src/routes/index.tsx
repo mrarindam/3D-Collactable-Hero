@@ -220,8 +220,11 @@ function Index() {
         />
 
         {/* Audio control button */}
-        <button
+        <motion.button
           onClick={togglePlay}
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ type: "spring", stiffness: 200, damping: 15, delay: 0.6 }}
           className="absolute top-6 right-6 z-[60] w-12 h-12 rounded-full border-2 border-white flex items-center justify-center text-white bg-transparent hover:bg-white/10 transition-all duration-300 scale-90 hover:scale-100 cursor-pointer"
           aria-label={isPlaying ? "Pause music" : "Play music"}
         >
@@ -230,10 +233,13 @@ function Index() {
           ) : (
             <VolumeX size={22} />
           )}
-        </button>
+        </motion.button>
 
         {/* Giant ghost text */}
-        <h1
+        <motion.h1
+          initial={{ y: -60, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ type: "spring", stiffness: 80, damping: 18, delay: 0.1 }}
           className="absolute inset-x-0 flex items-center justify-center pointer-events-none select-none"
           style={{
             zIndex: 2,
@@ -242,7 +248,6 @@ function Index() {
             fontSize: "clamp(40px, 13.5vw, 300px)",
             fontWeight: 900,
             color: "white",
-            opacity: 1,
             lineHeight: 1,
             textTransform: "uppercase",
             letterSpacing: "0.02em",
@@ -251,7 +256,7 @@ function Index() {
           }}
         >
           Future Leaders
-        </h1>
+        </motion.h1>
 
         {/* Top-left brand */}
         {/* <div
@@ -262,7 +267,13 @@ function Index() {
         </div> */}
 
         {/* Carousel */}
-        <div className="absolute inset-0" style={{ zIndex: 3 }}>
+        <motion.div
+          initial={{ y: 150, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ type: "spring", stiffness: 90, damping: 16, delay: 0.3 }}
+          className="absolute inset-0"
+          style={{ zIndex: 3 }}
+        >
           {IMAGES.map((item, i) => (
             <div key={i} style={styleFor(roleOf(i))}>
               <img
@@ -278,10 +289,13 @@ function Index() {
               />
             </div>
           ))}
-        </div>
+        </motion.div>
 
         {/* Bottom-left text + nav */}
-        <div
+        <motion.div
+          initial={{ y: 60, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ type: "spring", stiffness: 100, damping: 18, delay: 0.4 }}
           className="absolute bottom-6 left-4 sm:bottom-20 sm:left-24"
           style={{ zIndex: 60, maxWidth: 320 }}
         >
@@ -329,7 +343,7 @@ function Index() {
               );
             })}
           </div>
-        </div>
+        </motion.div>
 
         {/* Bottom-right link */}
         <motion.a
@@ -338,11 +352,17 @@ function Index() {
           rel="noopener noreferrer"
           onMouseEnter={() => setHoverDiscover(true)}
           onMouseLeave={() => setHoverDiscover(false)}
+          initial={{ y: 60, opacity: 0 }}
+          animate={{ y: 0, opacity: hoverDiscover ? 1 : 0.95 }}
           whileHover={{
             scale: 1.05,
             textShadow: "0px 0px 8px rgba(255, 255, 255, 0.6)",
           }}
-          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          transition={{
+            y: { type: "spring", stiffness: 100, damping: 18, delay: 0.5 },
+            opacity: { duration: 0.2 },
+            scale: { type: "spring", stiffness: 300, damping: 20 }
+          }}
           className="absolute bottom-6 right-4 sm:bottom-20 sm:right-10 flex items-center no-underline cursor-pointer"
           style={{
             zIndex: 60,
@@ -350,7 +370,6 @@ function Index() {
             fontSize: "clamp(20px, 4vw, 56px)",
             fontWeight: 400,
             color: "white",
-            opacity: hoverDiscover ? 1 : 0.95,
             letterSpacing: "-0.02em",
             lineHeight: 1,
             textTransform: "uppercase",
