@@ -207,10 +207,11 @@ function Index() {
         backgroundColor: IMAGES[activeIndex].bg,
         transition: `background-color ${DURATION}ms ${EASE}`,
         fontFamily: "'Metal Mania', sans-serif",
+        height: "100dvh",
       }}
       className="relative w-full overflow-hidden"
     >
-      <div className="relative w-full" style={{ height: "100vh", overflow: "hidden" }}>
+      <div className="relative w-full" style={{ height: "100dvh", overflow: "hidden" }}>
         {/* Grain overlay */}
         <div
           className="absolute inset-0 pointer-events-none"
