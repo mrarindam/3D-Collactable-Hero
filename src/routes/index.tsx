@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, type CSSProperties } from "react";
 import { ArrowLeft, ArrowRight, Volume2, VolumeX } from "lucide-react";
+import { motion } from "framer-motion";
 import anasPng from "@/assets/Anas.png";
 import arindamPng from "@/assets/Arindam.png";
 import sakunaPng from "@/assets/Sakuna.png";
@@ -301,45 +302,48 @@ function Index() {
               const Icon = dir === "prev" ? ArrowLeft : ArrowRight;
               const hovered = hoverBtn === dir;
               return (
-                <button
+                <motion.button
                   key={dir}
                   onClick={() => navigate(dir)}
                   onMouseEnter={() => setHoverBtn(dir)}
                   onMouseLeave={() => setHoverBtn(null)}
-                  aria-label={dir === "prev" ? "Previous" : "Next"}
-                  className="w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center"
-                  style={{
-                    backgroundColor: hovered ? "rgba(255,255,255,0.12)" : "transparent",
-                    border: "2px solid white",
-                    color: "white",
-                    transform: hovered ? "scale(1.08)" : "scale(1)",
-                    transition: "transform 150ms, background-color 150ms",
+                  whileHover={{
+                    scale: 1.12,
+                    backgroundColor: "rgba(255,255,255,0.15)",
+                    boxShadow: "0px 0px 15px rgba(255, 255, 255, 0.4)",
                   }}
+                  whileTap={{ scale: 0.92 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 15 }}
+                  aria-label={dir === "prev" ? "Previous" : "Next"}
+                  className="w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center border-2 border-white text-white bg-transparent cursor-pointer"
                 >
-                  <Icon
-                    size={26}
-                    strokeWidth={2.25}
-                    style={{
-                      transform: hovered
-                        ? dir === "next"
-                          ? "translateX(4px)"
-                          : "translateX(-4px)"
-                        : "translateX(0)",
-                      transition: "transform 200ms ease-out",
+                  <motion.div
+                    animate={{
+                      x: hovered ? (dir === "next" ? 4 : -4) : 0,
                     }}
-                  />
-                </button>
+                    transition={{ type: "spring", stiffness: 300, damping: 10 }}
+                  >
+                    <Icon size={26} strokeWidth={2.25} />
+                  </motion.div>
+                </motion.button>
               );
             })}
           </div>
         </div>
 
         {/* Bottom-right link */}
-        <a
+        <motion.a
           href="https://discord.gg/T8crg3yqe"
           target="_blank"
           rel="noopener noreferrer"
-          className="absolute bottom-6 right-4 sm:bottom-20 sm:right-10 flex items-center no-underline"
+          onMouseEnter={() => setHoverDiscover(true)}
+          onMouseLeave={() => setHoverDiscover(false)}
+          whileHover={{
+            scale: 1.05,
+            textShadow: "0px 0px 8px rgba(255, 255, 255, 0.6)",
+          }}
+          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          className="absolute bottom-6 right-4 sm:bottom-20 sm:right-10 flex items-center no-underline cursor-pointer"
           style={{
             zIndex: 60,
             fontFamily: "'Metal Mania', sans-serif",
@@ -351,21 +355,22 @@ function Index() {
             lineHeight: 1,
             textTransform: "uppercase",
             textDecoration: "none",
-            transition: "opacity 200ms",
           }}
-          onMouseEnter={() => setHoverDiscover(true)}
-          onMouseLeave={() => setHoverDiscover(false)}
         >
           DISCOVER IT
-          <ArrowRight
-            className="w-5 h-5 sm:w-8 sm:h-8 ml-2"
-            strokeWidth={2.25}
-            style={{
-              transform: hoverDiscover ? "translateX(8px)" : "translateX(0)",
-              transition: "transform 250ms ease-out",
+          <motion.div
+            animate={{
+              x: hoverDiscover ? 12 : 0,
             }}
-          />
-        </a>
+            transition={{ type: "spring", stiffness: 300, damping: 12 }}
+            className="flex items-center"
+          >
+            <ArrowRight
+              className="w-5 h-5 sm:w-8 sm:h-8 ml-2"
+              strokeWidth={2.25}
+            />
+          </motion.div>
+        </motion.a>
       </div>
     </div>
   );
