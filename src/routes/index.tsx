@@ -1,11 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, type CSSProperties } from "react";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, Volume2, VolumeX } from "lucide-react";
 import anasPng from "@/assets/Anas.png";
 import arindamPng from "@/assets/Arindam.png";
 import sakunaPng from "@/assets/Sakuna.png";
 import tojiPng from "@/assets/toji.png";
 import vikingPng from "@/assets/Viking.png";
+import anthemAudio from "@/Audio/Future Leaders Anthem.mp3";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -64,6 +65,53 @@ function Index() {
   const [isMobile, setIsMobile] = useState(false);
   const [hoverDiscover, setHoverDiscover] = useState(false);
   const [hoverBtn, setHoverBtn] = useState<"prev" | "next" | null>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    const audioInstance = new Audio(anthemAudio);
+    audioInstance.loop = true;
+    setAudio(audioInstance);
+
+    const playAudio = () => {
+      audioInstance.play()
+        .then(() => {
+          setIsPlaying(true);
+        })
+        .catch(() => {
+          console.log("Playback blocked. Waiting for interaction.");
+        });
+    };
+
+    playAudio();
+
+    const handleInteraction = () => {
+      if (audioInstance.paused) {
+        playAudio();
+      }
+      window.removeEventListener("click", handleInteraction);
+      window.removeEventListener("touchstart", handleInteraction);
+    };
+
+    window.addEventListener("click", handleInteraction);
+    window.addEventListener("touchstart", handleInteraction);
+
+    return () => {
+      audioInstance.pause();
+      window.removeEventListener("click", handleInteraction);
+      window.removeEventListener("touchstart", handleInteraction);
+    };
+  }, []);
+
+  const togglePlay = () => {
+    if (!audio) return;
+    if (isPlaying) {
+      audio.pause();
+      setIsPlaying(false);
+    } else {
+      audio.play().then(() => setIsPlaying(true));
+    }
+  };
 
   useEffect(() => {
     IMAGES.forEach((i) => {
@@ -169,6 +217,19 @@ function Index() {
             opacity: 0.4,
           }}
         />
+
+        {/* Audio control button */}
+        <button
+          onClick={togglePlay}
+          className="absolute top-6 right-6 z-[60] w-12 h-12 rounded-full border-2 border-white flex items-center justify-center text-white bg-transparent hover:bg-white/10 transition-all duration-300 scale-90 hover:scale-100 cursor-pointer"
+          aria-label={isPlaying ? "Pause music" : "Play music"}
+        >
+          {isPlaying ? (
+            <Volume2 size={22} className="animate-pulse" />
+          ) : (
+            <VolumeX size={22} />
+          )}
+        </button>
 
         {/* Giant ghost text */}
         <h1
