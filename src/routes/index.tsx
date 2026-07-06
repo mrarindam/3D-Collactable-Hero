@@ -238,13 +238,13 @@ function Index() {
             zIndex: 2,
             top: "18%",
             fontFamily: "'Metal Mania', sans-serif",
-            fontSize: "clamp(40px, 11.5vw, 300px)",
+            fontSize: "clamp(40px, 13.5vw, 300px)",
             fontWeight: 900,
             color: "white",
             opacity: 1,
             lineHeight: 1,
             textTransform: "uppercase",
-            letterSpacing: "0.05em",
+            letterSpacing: "0.02em",
             whiteSpace: "nowrap",
             margin: 0,
           }}
@@ -291,7 +291,7 @@ function Index() {
             {IMAGES[activeIndex].name}
           </h2>
           <p
-            className="hidden sm:block text-xs sm:text-sm mb-4 sm:mb-5 transition-opacity duration-300"
+            className="block text-[11px] sm:text-sm mb-3 sm:mb-5 transition-opacity duration-300"
             style={{ color: "white", opacity: 0.85, lineHeight: 1.6 }}
           >
             {IMAGES[activeIndex].subtitle}
@@ -347,7 +347,7 @@ function Index() {
             fontWeight: 400,
             color: "white",
             opacity: hoverDiscover ? 1 : 0.95,
-            letterSpacing: "0.06em",
+            letterSpacing: "-0.02em",
             lineHeight: 1,
             textTransform: "uppercase",
             textDecoration: "none",
