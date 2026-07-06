@@ -244,7 +244,7 @@ function Index() {
             opacity: 1,
             lineHeight: 1,
             textTransform: "uppercase",
-            letterSpacing: "0.02em",
+            letterSpacing: "0.08em",
             whiteSpace: "nowrap",
             margin: 0,
           }}
@@ -347,7 +347,7 @@ function Index() {
             fontWeight: 400,
             color: "white",
             opacity: hoverDiscover ? 1 : 0.95,
-            letterSpacing: "-0.02em",
+            letterSpacing: "0.06em",
             lineHeight: 1,
             textTransform: "uppercase",
             textDecoration: "none",
